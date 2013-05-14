@@ -12,5 +12,5 @@ Check it out at <http://tools.jkirchartz.com>
 * <http://tools.jkirchartz.com/megafeed>
   Super-stalker feed, collect all my blogs, twitter, and github activity.
 
-* <http://xmpp:jkirchartz@appspot.com>
-  Simple chat-bot/assistant
+* <a href="xmpp:jkirchartz@appspot.com">jkirchartz@appspot.com</a>
+  Simple XMPP chat-bot/assistant
