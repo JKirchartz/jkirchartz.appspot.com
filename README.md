@@ -5,7 +5,7 @@ A hacky toolbox built on appengine.
 
 Check it out at <http://tools.jkirchartz.com>
 
-- <http://tools.jkirchartz.com/untiny?url=http://bit.ly/ZXMZox>{shrunken url}
+- <http://tools.jkirchartz.com/untiny?url=http://bit.ly/ZXMZox>
   get the full URL from a shortened one, to avoid rick-rolls and other
   risky clicks.
 - <http://tools.jkirchartz.com/megafeed>
