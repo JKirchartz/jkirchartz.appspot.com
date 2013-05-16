@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /megafeed
+Disallow: /untiny
+Disallow: /_ah
