@@ -17,14 +17,17 @@ HEADERS = {"User-agent":"jkirchartz@appspot.com, A Robot Assistant"}
 class XMPPHandler(xmpp_handlers.CommandHandler):
 
     def unhandled_command(self,message=None):
-        message.reply(WRONG_MSG);
+        message.reply(WRONG_MSG)
 
     def text_message(self,message=None):
         m_body = str(message.body)
-        if re.match("^(hello|hi|hey|yo|help|\\help)",m_body.strip(), re.I):
-            message.reply(DEFAULT_MSG+" "+HELP_MSG)
+        if re.match("^(hello|hi|hey|yo|help)",m_body.strip(), re.I):
+            message.reply(DEFAULT_MSG+"\n"+HELP_MSG)
         else:
             message.reply(WRONG_MSG)
+
+    def help_command(self,message=None):
+        message.reply(HELP_MSG)
 
     def google_command(self,message=None):
         m_body = str(message.body)[7:]
@@ -37,14 +40,15 @@ class XMPPHandler(xmpp_handlers.CommandHandler):
         message.reply(untiny(m_body.strip()))
 
     def ddg_command(self,message=None):
-        m_body = str(message.body)[4:]
-        params = urlencode({'q':m_body.strip(),'format':'json'})
+        m_body = str(message.body)[4:].strip()
+        params = urlencode({'q':str(m_body),'format':'json','no_html':1})
         conn = httplib.HTTPConnection('api.duckduckgo.com')
         output = ""
         try:
             conn.request('GET',"http://api.duckduckgo.com/?"+params,HEADERS)
             result = conn.getresponse()
             data = json.loads(str(result.read()))
+            log.info("http://api.duckduckgo.com/?"+params)
         except Exception, e:
             log.error(e)
 
@@ -55,14 +59,13 @@ class XMPPHandler(xmpp_handlers.CommandHandler):
         elif data["Redirect"]:
             output += data["Redirect"]
         else:
-            output += "Uhh. IDK try again later or go straight to the source:"
+            output += "Uhh. IDK... Try going straight to the source:"
 
         if not data["Redirect"]:
             output += "\n"
             output += "".join(["https://duckduckgo.com/?",
-                urlencode({'q':m_body.strip()})])
+                 urlencode({'q':str(m_body))})])
 
-        output = re.sub(r"<[^>]+>","",output)
         message.reply(output)
 
 

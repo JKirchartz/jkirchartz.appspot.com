@@ -14,3 +14,7 @@ Check it out at <http://tools.jkirchartz.com>
 
 * <a href="xmpp:jkirchartz@appspot.com">jkirchartz@appspot.com</a>
   Simple XMPP chat-bot/assistant
+  * \ddg <query> Hit's [DuckDuckGo's](http://ddg.gg) Instant Answers
+    which can do most of the things [listed here](http://ddg.gg/goodies)
+  * \google <query> ... Let me google that for you... 
+  * \untiny <url> Unshorten short URLs
