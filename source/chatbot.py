@@ -48,7 +48,6 @@ class XMPPHandler(xmpp_handlers.CommandHandler):
             conn.request('GET',"http://api.duckduckgo.com/?"+params,HEADERS)
             result = conn.getresponse()
             data = json.loads(str(result.read()))
-            log.info("http://api.duckduckgo.com/?"+params)
         except Exception, e:
             log.error(e)
 
@@ -64,7 +63,7 @@ class XMPPHandler(xmpp_handlers.CommandHandler):
         if not data["Redirect"]:
             output += "\n"
             output += "".join(["https://duckduckgo.com/?",
-                 urlencode({'q':str(m_body))})])
+                 urlencode({'q':str(m_body)})])
 
         message.reply(output)
 
