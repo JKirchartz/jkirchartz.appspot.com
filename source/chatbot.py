@@ -41,7 +41,7 @@ class XMPPHandler(xmpp_handlers.CommandHandler):
 
     def ddg_command(self,message=None):
         m_body = str(message.body)[4:].strip()
-        params = urlencode({'q':str(m_body),'format':'json','no_html':1})
+        params = urlencode({'q':m_body,'format':'json','no_html':1})
         conn = httplib.HTTPConnection('api.duckduckgo.com')
         output = ""
         try:
@@ -63,7 +63,7 @@ class XMPPHandler(xmpp_handlers.CommandHandler):
         if not data["Redirect"]:
             output += "\n"
             output += "".join(["https://duckduckgo.com/?",
-                 urlencode({'q':str(m_body)})])
+                 urlencode({'q':m_body})])
 
         message.reply(output)
 
