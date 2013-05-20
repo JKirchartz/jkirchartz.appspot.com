@@ -1,18 +1,20 @@
-import webapp2, re, httplib, time
+import webapp2, re, httplib, time, random
 import simplejson as json
 import logging as log
+from datetime import datetime
 from urllib import urlencode
 from untinyurl import untiny
 from google.appengine.api import xmpp
 from google.appengine.ext.webapp import xmpp_handlers
 
-DEFAULT_MSG = "Hey, I'm Joel's robot assistant. What can I do for you?"
+DEFAULT_MSG = "Hey, I'm KirchBot, Joel's robot assistant. What can I do for you?"
 HELP_MSG    = "Hit up DuckDuckGo's 'Instant Answers' with \ddg <query>.\n"
-HELP_MSG   += "Google it with \google <query>. \n"
-HELP_MSG   += "Unshorten a url with \untiny <url>."
+HELP_MSG   += "Google it with \google <query>.\n"
+HELP_MSG   += "Unshorten a url with \untiny <url>.\n"
+HELP_MSG   += "Roll the dice \\roll <sides (optional, default 6)>.\n"
 WRONG_MSG   = "Sorry, You appear to be under the impression that I would "
 WRONG_MSG  += "understand what you wanted me to do..."
-HEADERS = {"User-agent":"jkirchartz@appspot.com, A Robot Assistant"}
+HEADERS = {"User-agent":"KirchBot@jkirchartz.appspotchat.com, A Robot Assistant"}
 
 class XMPPHandler(xmpp_handlers.CommandHandler):
 
@@ -22,12 +24,27 @@ class XMPPHandler(xmpp_handlers.CommandHandler):
     def text_message(self,message=None):
         m_body = str(message.body)
         if re.match("^(hello|hi|hey|yo|help)",m_body.strip(), re.I):
-            message.reply(DEFAULT_MSG+"\n"+HELP_MSG)
+            message.reply(DEFAULT_MSG+"\n\n"+HELP_MSG)
         else:
             message.reply(WRONG_MSG)
 
     def help_command(self,message=None):
         message.reply(HELP_MSG)
+
+    def roll_command(self,message=None):
+        m_body = str(message.body)[5:].strip()
+        random.seed(message.sender+str(datetime.now()))
+        try:
+            if re.match("\\d+",m_body):
+                output = random.randrange(int(m_body))
+            else:
+                output = random.randrange(6)
+        except Exception, e:
+            output = "Oopsies, it rolled under the couch. Try again."
+            log.error(e)
+
+        message.reply(str(output))
+
 
     def google_command(self,message=None):
         m_body = str(message.body)[7:]
