@@ -1,9 +1,9 @@
 import webapp2, re, httplib, time, random
-import simplejson as json
 import logging as log
 from datetime import datetime
 from urllib import urlencode
-from untinyurl import untiny
+import libs.simplejson as json
+from libs.untinyurl import untiny
 from google.appengine.api import xmpp
 from google.appengine.ext.webapp import xmpp_handlers
 

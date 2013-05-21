@@ -2,9 +2,9 @@
 
 # --------- Imports --------
 import webapp2, logging
-import feedparser
+import libs.feedparser as feedparser
 import datetime
-import PyRSS2Gen
+import libs.PyRSS2Gen as PyRSS2Gen
 
 # ---- The Job Handler --------
 class doit(webapp2.RequestHandler):
