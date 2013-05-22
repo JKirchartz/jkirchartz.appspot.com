@@ -18,4 +18,5 @@ Check it out at <http://tools.jkirchartz.com>
     which can do most of the things [listed here](http://ddg.gg/goodies)
   * \google <query> ... Let me google that for you... 
   * \untiny <url> Unshorten short URLs
+  * \bukkit <(optional, image name or extension)> Get a [bukk.it](http://bukk.it) image
   * \roll <sides (optional, default 6)> Roll the dice

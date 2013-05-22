@@ -3,6 +3,7 @@ import logging as log
 from datetime import datetime
 from urllib import urlencode
 import libs.simplejson as json
+from libs.pyquery import PyQuery as pq
 from libs.untinyurl import untiny
 from google.appengine.api import xmpp
 from google.appengine.ext.webapp import xmpp_handlers
@@ -11,10 +12,13 @@ DEFAULT_MSG = "Hey, I'm KirchBot, Joel's robot assistant. What can I do for you?
 HELP_MSG    = "Hit up DuckDuckGo's 'Instant Answers' with \ddg <query>.\n"
 HELP_MSG   += "Google it with \google <query>.\n"
 HELP_MSG   += "Unshorten a url with \untiny <url>.\n"
+HELP_MSG   += "Get a bukk.it image with \\bukkit <(optional, image name or extension)>.\n"
 HELP_MSG   += "Roll the dice \\roll <sides (optional, default 6)>.\n"
 WRONG_MSG   = "Sorry, You appear to be under the impression that I would "
 WRONG_MSG  += "understand what you wanted me to do..."
+
 HEADERS = {"User-agent":"KirchBot@jkirchartz.appspotchat.com, A Robot Assistant"}
+BUKKIT = []
 
 class XMPPHandler(xmpp_handlers.CommandHandler):
 
@@ -30,6 +34,26 @@ class XMPPHandler(xmpp_handlers.CommandHandler):
 
     def help_command(self,message=None):
         message.reply(HELP_MSG)
+
+    def bukkit_command(self,message=None):
+        m_body = str(message.body)[7:].strip()
+        if len(BUKKIT) == 0:
+            try:
+                data = pq("http://bukk.it/")
+                for img in data('tr > td > a'):
+                    BUKKIT.append(img.attrib['href'])
+            except Exception, e:
+                log.error(e)
+        if len(m_body) == 0:
+            output = random.choice(BUKKIT)
+        else:
+            matching = [s for s in BUKKIT if m_body.upper() in s.upper()]
+            if len(matching):
+                output = random.choice(matching)
+            else:
+                output = " doesn't have anything like that..."
+
+        message.reply("http://bukk.it/"+output);
 
     def roll_command(self,message=None):
         m_body = str(message.body)[5:].strip()
