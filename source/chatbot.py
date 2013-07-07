@@ -13,6 +13,7 @@ HELP_MSG    = "Hit up DuckDuckGo's 'Instant Answers' with \ddg <query>.\n"
 HELP_MSG   += "Google it with \google <query>.\n"
 HELP_MSG   += "Unshorten a url with \untiny <url>.\n"
 HELP_MSG   += "Get a bukk.it image with \\bukkit <(optional, image name or extension)>.\n"
+HELP_MSG   += "Search gifs from giphy.com with \\gif <query>.\n"
 HELP_MSG   += "Roll the dice \\roll <sides (optional, default 6)>.\n"
 WRONG_MSG   = "Sorry, You appear to be under the impression that I would "
 WRONG_MSG  += "understand what you wanted me to do..."
@@ -29,6 +30,7 @@ class XMPPHandler(xmpp_handlers.CommandHandler):
         m_body = str(message.body)
         if re.match("^(hello|hi|hey|yo|help)",m_body.strip(), re.I):
             message.reply(DEFAULT_MSG+"\n\n"+HELP_MSG)
+            # elif: re.match("^\!(.*?\b)",m_body.strip(), re.I):
         else:
             message.reply(WRONG_MSG)
 
@@ -53,7 +55,25 @@ class XMPPHandler(xmpp_handlers.CommandHandler):
             else:
                 output = " doesn't have anything like that..."
 
-        message.reply("http://bukk.it/"+output);
+        message.reply("http://bukk.it/"+output)
+
+    def gif_command(self,message=None):
+        url ="http://api.giphy.com/v1/gifs/search?"
+        m_body = str(message.body)[4:].strip()
+        params = urlencode({'q':m_body.strip(),
+                            'api_key':"dc6zaTOxFJmzC",
+                            'limit':1})
+        conn = httplib.HTTPConnection('api.giphy.com')
+        output = ""
+        try:
+            conn.request('GET',url+params,HEADERS)
+            result = conn.getresponse()
+            data = json.loads(str(result.read()))
+        except Exception, e:
+            log.error(e)
+
+        output = data["data"][0]["images"]["original"]["url"]
+        message.reply(output)
 
     def roll_command(self,message=None):
         m_body = str(message.body)[5:].strip()
