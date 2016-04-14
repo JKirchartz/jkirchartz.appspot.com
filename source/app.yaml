@@ -19,6 +19,8 @@ handlers:
   script: untiny.app
 - url: /megafeed
   script: megafeed.app
+- url: /jobfeed
+  script: jobfeed.app
 - url: /_ah/.*
   script: chatbot.app
 
