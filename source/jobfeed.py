@@ -13,12 +13,12 @@ class doit(webapp2.RequestHandler):
         output=""
         feeds = [
                  'http://www.pittsource.com/all_jobs.atom',
-                 'http://rss.indeed.com/rss?q=(' + ' OR '.join(keywords) + ')&l=Pittsburgh%2C+PA',
-                 'http://pghcareerconnector.com/jobs/?display=rss&keywords=' + ' OR '.join(keywords) + '&filter=%2BSTATE_PROVINCE%3Apennsylvania%20%2BSHOW_AT%3A766827&resultsPerPage=1000',
-                 'https://pittsburgh.craigslist.org/search/web?format=rss&query=' + ' | '.join(keywords),
-                 'https://pittsburgh.craigslist.org/search/eng?format=rss&query=' + ' | '.join(keywords),
-                 'https://pittsburgh.craigslist.org/search/sof?format=rss&query=' + ' | '.join(keywords),
-                 'https://pittsburgh.craigslist.org/search/cpg?format=rss&query=' + ' | '.join(keywords),
+                 'http://rss.indeed.com/rss?q=(' + '%20OR%20'.join(keywords) + ')&l=Pittsburgh%2C+PA',
+                 'http://pghcareerconnector.com/jobs/?display=rss&keywords=' + '%20OR%20'.join(keywords) + '&filter=%2BSTATE_PROVINCE%3Apennsylvania%20%2BSHOW_AT%3A766827&resultsPerPage=1000',
+                 'https://pittsburgh.craigslist.org/search/web?format=rss&query=' + '%20|%20'.join(keywords),
+                 'https://pittsburgh.craigslist.org/search/eng?format=rss&query=' + '%20|%20'.join(keywords),
+                 'https://pittsburgh.craigslist.org/search/sof?format=rss&query=' + '%20|%20'.join(keywords),
+                 'https://pittsburgh.craigslist.org/search/cpg?format=rss&query=' + '%20|%20'.join(keywords),
                 ]
         entries = []
         for feed in feeds:
