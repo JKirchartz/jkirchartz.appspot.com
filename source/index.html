@@ -18,6 +18,12 @@
       background: #0B6EC0;
       outline:transparent;
     }
+    nav button:first-of-type {
+      border-radius: 2em 0 0 2em;
+    }
+    nav button:last-of-type {
+      border-radius: 0 2em 2em 0;
+    }
     nav button:hover {
       background: linear-gradient(to bottom, #2C82C9 0%,#0B6EC0 100%);
     }
@@ -38,9 +44,9 @@
       margin:auto;
       max-width:50%;
       max-height:50%;
-      border:1px solid #333;
       padding:1em;
       background:#ddd;
+      border-radius:2em;
     }
     form button, form input, form textarea {
       display:block;
