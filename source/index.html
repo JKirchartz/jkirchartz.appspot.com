@@ -1,93 +1,175 @@
-<title>Joel's Toolkit</title>
-<h1>Joel's Toolkit</h1>
-<style>
-    * { box-sizing:border-box; }
-    form {
-        display:inline-block;
-        border:1px solid #333;
-        padding:1em;
-        margin:1em;
-        background:#ddd;
-        max-width:33%;
-        max-height:33%;
-        overflow:auto;
+<head>
+  <title>Joel's Toolkit</title>
+  <style>
+    * { box-sizing:border-box; font-family: sans-serif; }
+    nav {
+      display:flex;
+      justify-content: flex-end;
     }
-    form button, form input {
-        display:block;
-        width:90%;
-        margin:0.5em auto;
-        padding:0.5em;
+    nav h1 {
+      padding:0 1em;
+      flex: 2 auto;
+    }
+    nav button {
+      padding:1em;
+      border:0px;
+      color:#FFF;
+      text-transform:capitalize;
+      background: #0B6EC0;
+      outline:transparent;
+    }
+    nav button:hover {
+      background: linear-gradient(to bottom, #2C82C9 0%,#0B6EC0 100%);
+    }
+    nav button.active {
+      background: #C00B0B;
+      background: #ddd;
+      color:#111;
+    }
+    #tools {
+      display:flex;
+      align-items: flex-start;
+      align-content: space-around;
+      margin:1em;
+    }
+    form {
+      flex-grow: 1;
+      display:none;
+      margin:auto;
+      max-width:50%;
+      max-height:50%;
+      border:1px solid #333;
+      padding:1em;
+      background:#ddd;
+    }
+    form button, form input, form textarea {
+      display:block;
+      width:90%;
+      margin:0.5em auto;
+      padding:0.5em;
     }
     #untiny a { display:block; margin:0.5em }
-</style>
-<p>
-    Simple toolkit built on app-engine, a work in progress.
-</p>
-<!--
-todo:flat design so each tool is like it's own box… plus need to add more tools & write some JS for it…
-also wanna make keyboard shortcuts for all of them, probably just qwerty the whole way, each one gets a letter
--->
-<form id="untiny" action="/untiny" method="GET">
+  </style>
+</head>
+<nav>
+  <h1>Minimal Toolkit</h1>
+  <button name="untiny" class="active">Unshorten URL</button>
+  <button name="de-encoder">URI En/Decode</button>
+  <button name="rand-color">Random Color</button>
+  <button name="commatabs">Commas to Tabs</button>
+  <button name="tabcommas">Tabs to Commas</button>
+</nav>
+<div id="tools">
+  <!--
+  todo:flat design so each tool is like it's own box… plus need to add more tools & write some JS for it…
+  also wanna make keyboard shortcuts for all of them, probably just qwerty the whole way, each one gets a letter
+  -->
+  <form id="untiny" action="/untiny" method="GET" style="display:block">
     <h2>Unshorten URL</h2>
     <input id="untiny-url"  name="url" />
     <button>Unshorten URL</button>
-</form>
-<script>
-document.getElementById('untiny').onsubmit = function (e) {
-    e.preventDefault;
-    var r = new XMLHttpRequest(),
-        url = document.getElementById('untiny-url').value;
-    r.open("GET", "/untiny?url="+url, true);
-    r.onreadystatechange = function () {
-        if (r.readyState != 4 || r.status != 200) return; 
+  </form>
+  <script>
+    document.getElementById('untiny').onsubmit = function (e) {
+      e.preventDefault;
+      var r = new XMLHttpRequest(),
+          url = document.getElementById('untiny-url').value;
+      r.open("GET", "/untiny?url="+url, true);
+      r.onreadystatechange = function () {
+        if (r.readyState != 4 || r.status != 200) return;
         var link = document.createElement('a');
         link.href = r.responseText;
         link.innerHTML = r.responseText;
         document.getElementById('untiny').appendChild(link);
-    };
-    r.send(null);
-    return false;
-}
-</script>
+      };
+      r.send(null);
+      return false;
+    }
+  </script>
 
-<form id="de-encoder">
+  <form id="de-encoder">
     <h2>URI encode/decode</h2>
     <input id="codec" />
-<button id="codec_btn">URI (en|de)code</button>
-</form>
-<script>
-var codec = document.getElementById('codec');
-document.getElementById('de-encoder').onsubmit = function(e){
-    e.preventDefault();
-    var val = codec.value;
-    if(val.indexOf('%')>0){
+    <button id="codec_btn">URI (en|de)code</button>
+  </form>
+  <script>
+    var codec = document.getElementById('codec');
+    document.getElementById('de-encoder').onsubmit = function(e){
+      e.preventDefault();
+      var val = codec.value;
+      if(val.indexOf('%')>0){
         codec.value = decodeURIComponent(val);
-    }else{
+      }else{
         codec.value = encodeURIComponent(val);
+      }
+      return false;
     }
-    return false;
-}
-</script>
+  </script>
 
-<form id="rand-color">
+  <form id="rand-color">
     <h2>Random Color</h2>
-<button id="rand-color_btn">random color</button>
-</form>
-<script>
+    <button id="rand-color_btn">random color</button>
+  </form>
+  <script>
     var randcolor = document.getElementById('rand-color');
     randcolor.onsubmit = function(e){
-        e.preventDefault();
-        var color = Math.floor(Math.random()*16777216).toString(16),
-            title = document.createElement('h1'),
-            first = document.querySelector('#rand-color h1');
-        title.innerHTML = '#'+color;
-        title.style.backgroundColor = '#'+color;
-        title.style.border = "1px solid black";
-        title.style.textAlign = "center";
-        if(first){
-            randcolor.removeChild(first);
-        }
-        randcolor.appendChild(title);
-        return false;
+      e.preventDefault();
+      var color = Math.floor(Math.random()*16777216).toString(16),
+          title = document.createElement('h1'),
+          first = document.querySelector('#rand-color h1');
+      title.innerHTML = '#'+color;
+      title.style.backgroundColor = '#'+color;
+      title.style.border = "1px solid black";
+      title.style.textAlign = "center";
+      if(first){
+        randcolor.removeChild(first);
+      }
+      randcolor.appendChild(title);
+      return false;
     }
+  </script>
+
+  <form id="commatabs">
+    <h2>Commas to Tabs</h2>
+    <textarea id="commatabber"></textarea>
+    <button id="execute">Convert Commas to Tabs</button>
+  </form>
+  <script>
+    document.getElementById('commatabs').onsubmit = function(e) {
+      e.preventDefault();
+      var ct = document.getElementById('commatabber');
+      var text = ct.value;
+      ct.value = text.replace(/,/g, '       ');
+      return false;
+    }
+  </script>
+
+  <form id="tabcommas">
+    <h2>Tabs to Commas</h2>
+    <textarea id="tabcommer"></textarea>
+    <button id="execute">Convert Tabs to Commas</button>
+  </form>
+  <script>
+    document.getElementById('tabcommas').onsubmit = function(e) {
+      e.preventDefault();
+      var ct = document.getElementById('tabcommer');
+      var text = ct.value;
+      ct.value = text.replace(/\t/g, ',');
+      return false;
+    }
+  </script>
+</div>
+<script>
+  /* handle nav */
+var $ = function(el, callback) {
+  [].forEach.call(document.querySelectorAll(el), callback);
+}
+document.body.addEventListener('click', function(e) {
+    if(e.target.parentNode.tagName.toLowerCase() !== 'nav') return;
+    e.preventDefault;
+    $('form', function (form) { form.style.display = "none"; });
+    $('nav button', function (nav) { nav.className=""; });
+    e.target.className="active";
+    document.querySelector('#' + e.target.name).style.display = 'block';
+  });
 </script>
