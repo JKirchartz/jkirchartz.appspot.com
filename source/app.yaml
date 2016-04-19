@@ -21,6 +21,8 @@ handlers:
   script: megafeed.app
 - url: /jobfeed
   script: jobfeed.app
+- url: /jobportal
+  script: jobportal.app
 - url: /_ah/.*
   script: chatbot.app
 
@@ -30,5 +32,7 @@ inbound_services:
 libraries:
 - name: webapp2
   version: "2.5.2"
+- name: jinja2
+  version: latest
 - name: lxml
-  version: "latest"
+  version: latest
