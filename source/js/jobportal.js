@@ -42,22 +42,21 @@
     console.log("get jobs in ", location);
     $.get("http://tools.jkirchartz.com/jobportal.json?q=" + query + "&l=" + location)
       .done(function(data) {
-        for (var item in data.results) {
-          console.log(item);
+        for (var i in data.results) {
           var markerImg = generateMarker();
           var marker = new google.maps.Marker({
             map: map,
-            position: new google.maps.LatLng(item.latitude, item.longitude),
+            position: new google.maps.LatLng(data.results[i].latitude, data.results[i].longitude),
             icon: markerImg.icon,
             shadow: markerImg.shadow
           });
           var infowindow = new google.maps.InfoWindow({
             content: ["<div id='content'><h1 id='firstHeading' class='firstHeading'>",
-              item.jobtitle,
+              data.results[i].jobtitle,
               "</h1><div id='bodyContent'><p>",
-              item.snippet,
+              data.results[i].snippet,
               "</p><a href='",
-              item.url,
+              data.results[i].url,
               "' target='_blank'>View More</a></div>"
             ].join('')
           });
@@ -70,7 +69,7 @@
 
   function generateMarker(type) {
     var pinColor;
-    switch(type.toLowerCase()) {
+    switch((type || '').toLowerCase()) {
       case "home":
         pinColor = "FF7569";
       break;
