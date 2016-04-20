@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Joel's Job Portal</title>
+    <link rel="stylesheet" href="css/jobportal.css" type="text/css" media="all" />
+  </head>
+  <body>
+    <header>
+      <form action="#" id="search">
+        <input type=text id=query placeholder='Job Search'></input>
+        <input type=text id=address placeholder='Home Address'></input>
+        <button>Search &#x1f50e;</button>
+      </form>
+    </header>
+    <div id="map"></div>
+    <div id="loading"></div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="/js/jobportal.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk9uRL4ZmtQayqfvydLWEbjqltjD0LzK8&callback=initialize" async defer></script>
+</html>

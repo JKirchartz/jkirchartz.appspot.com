@@ -1,0 +1,59 @@
+/*
+ * jobportal.css
+ * Copyleft (ↄ) 2016 kirch
+ *
+ * Distributed under terms of the NPL (Necessary Public License) license.
+ */
+
+
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin:0; padding:0; }
+@keyframes spin {
+  0% { transform:rotate(0deg); -webkit-transform-origin:50% 50%; }
+  100% { transform:rotate(359deg); }
+}
+#loading {
+  position:absolute;
+  top:0; left:0;
+  height: 100%; width: 100%;
+  background: rgba(255, 255, 255, 0.75);
+  z-index: 5000;
+}
+#loading:after {
+  margin: auto;
+  position:absolute;
+  z-index: 6000;
+  top: 0; right: 0; bottom: 0; left: 0;
+  width:2em; height:2em;
+  display:block;
+  border-radius:100%;
+  border:2em solid #000;
+  border-top-color:transparent;
+  overflow:hidden;
+  animation:0.8s spin infinite linear;
+  -webkit-animation:0.8s spin infinite linear;
+}
+#map {
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 1;
+}
+header {
+  position:absolute;
+  top: 10px;
+  left: 150px;
+  z-index: 1000;
+}
+
+#search {
+  background: rgba(255, 255, 255, 0.8);
+  padding:0.5em;
+  border-radius:0.5em;
+}
+#search input {
+  margin:0.5em 0;
+  width: auto;
+}
+

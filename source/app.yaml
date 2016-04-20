@@ -12,6 +12,9 @@ handlers:
 - url: /
   static_files: index.html
   upload: index\.html
+- url: /(.*\.(html))
+  static_files: static/\1
+  upload: static/(.*\.(html))
 - url: /robots.txt
   static_files: robots.txt
   upload: robots\.txt
@@ -21,7 +24,7 @@ handlers:
   script: megafeed.app
 - url: /jobfeed
   script: jobfeed.app
-- url: /jobportal
+- url: /jobportal.json
   script: jobportal.app
 - url: /_ah/.*
   script: chatbot.app
