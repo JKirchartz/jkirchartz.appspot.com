@@ -2,17 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0,width=device-width">
     <title>Joel's Job Portal</title>
     <link rel="stylesheet" href="css/jobportal.css" type="text/css" media="all" />
   </head>
   <body>
-    <header>
-      <form action="#" id="search">
-        <input type=text id=query placeholder='Job Search'></input>
-        <input type=text id=address placeholder='Home Address'></input>
-        <button>Search &#x1f50e;</button>
-      </form>
-    </header>
+    <form action="#" id="search">
+      <input type=text id=query placeholder='Job Search'></input>
+      <input type=text id=address placeholder='Home Address'></input>
+      <select id=mode>
+        <option value=TRANSIT>Transit</option>
+        <option value=DRIVING>Driving</option>
+        <option value=WALKING>Walking</option>
+        <option value=BICYCLING>Bicycling</option>
+      </select>
+      <button>Search &#x1f50e;</button>
+    </form>
     <div id="map"></div>
     <div id="loading"></div>
   </body>
