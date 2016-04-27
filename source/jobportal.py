@@ -10,7 +10,11 @@ import webapp2, logging, json
 from indeed import IndeedClient
 
 class JobPortal(webapp2.RequestHandler):
-    def indeedJobs(self, client, query, location):
+    """Get Jobs to place on map
+    """
+    def jobs(self, client, query, location):
+        """Query Indeed.com for jobs
+        """
         params = {
             'q': query, # query
             'l': location, #location
@@ -22,11 +26,14 @@ class JobPortal(webapp2.RequestHandler):
         }
         return client.search(**params)
 
-    def indeedDetails(self, client, jobs):
-        return client.jobs(jobkeys = jobs)
-
     def get(self):
-        client = IndeedClient('4970113146490412') # not secure, coz repo, but whatevs
+        """Interact with `get` request from front-end
+        Currently only does Indeed, other APIs to take into consideration:
+            USAjobs.gov, key:  EwesKi7XhFETegcAroJCod5jeP9wwBkzanA1qatBMRY=
+            AuthenticJobs.com, key: de1d14f970eaf280a271b1d5beffafe9
+        """
+        indeed_key = '4970113146490412' # not secure, coz repo, but whatevs
+        client = IndeedClient(indeed_key)
         query = self.request.get_all("q")
         location = self.request.get_all("l")
         jobids = self.request.get_all("jobids")
@@ -34,16 +41,12 @@ class JobPortal(webapp2.RequestHandler):
         output = ""
 
         if query and not jobids:
-            output = self.indeedJobs(client, query, location)
+            output = self.jobs(client, query, location)
         elif jobids and not query:
-            output = self.indeedDetails(client, tuple(jobids.split(',')))
+            output = client.jobs(tuple(jobids.split(',')))
         elif all != '':
-            jobs = self.indeedJobs(client, query, location)
-            results = jobs.results
-            output = self.indeedDetails(client,
-                                        tuple([job.jobkey for job in results]))
-
-
+            jobs = self.jobs(client, query, location)
+            output = client.jobs(tuple([job.jobkey for job in jobs.results]))
 
             # for job in jobs get jobkey & use that to get all data then
             # colloide data on job key

@@ -64,6 +64,7 @@
   <button name="rand-color">Random Color</button>
   <button name="commatabs">Commas to Tabs</button>
   <button name="tabcommas">Tabs to Commas</button>
+  <button name="escape_rex">Escape JS Regex</button>
 </nav>
 <div id="tools">
   <!--
@@ -156,6 +157,19 @@
       var ct = document.getElementById('tabcommer');
       var text = ct.value;
       ct.value = text.replace(/\t/g, ',');
+      return false;
+    }
+  </script>
+
+  <form id="escape_rex">
+    <input id="escape_regex"></input>
+    <button id="execute">Escape JS Regex</button>
+  </form>
+  <script>
+    document.getElementById('escape_rex').onsubmit = function(e) {
+      e.preventDefault();
+      var ct = document.getElementById('escape_regex');
+      ct.value = ct.value.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
       return false;
     }
   </script>
