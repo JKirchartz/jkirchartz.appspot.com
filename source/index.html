@@ -235,12 +235,13 @@
   var $ = function(el, callback) {
     [].forEach.call(document.querySelectorAll(el), callback);
   }
-  document.body.addEventListener('click', function(e) {
-    if(e.target.parentNode.tagName.toLowerCase() !== 'nav') return;
-    e.preventDefault;
-    $('form', function (form) { form.style.display = "none"; });
-    $('nav button', function (nav) { nav.className=""; });
-    e.target.className="active";
-    document.querySelector('#' + e.target.name).style.display = 'block';
+  $('nav button', function(button){
+    button.addEventListener('click', function(e) {
+      e.preventDefault;
+      $('form', function (form) { form.style.display = "none"; });
+      $('nav button', function (nav) { nav.className=""; });
+      e.target.className="active";
+      document.querySelector('#' + e.target.name).style.display = 'block';
+    });
   });
 </script>
