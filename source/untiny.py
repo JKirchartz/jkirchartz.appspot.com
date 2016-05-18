@@ -2,7 +2,7 @@
 
 # --------- Imports --------
 import webapp2, logging
-from libs.untinyurl import untiny 
+from libs.untinyurl import untiny
 # untinyurl.py; https://github.com/JulienPalard/untinyurl
 
 # ---- The Job Handler --------

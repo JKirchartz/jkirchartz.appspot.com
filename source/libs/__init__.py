@@ -8,6 +8,4 @@ sys.path.append(path)
 for name in os.listdir(path):
     if name.endswith('.py') and '__init__' not in name:
         name = name.rstrip('.py')
-    elif not os.path.isdir(os.path.join(path,name)):
-        continue
-    __import__(name)
+        __import__(name)
