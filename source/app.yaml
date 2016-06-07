@@ -29,6 +29,8 @@ handlers:
   script: jobfeed.app
 - url: /jobportal.json
   script: jobportal.app
+- url: /researchfeed
+  script: researchfeed.app
 - url: /_ah/.*
   script: chatbot.app
 
