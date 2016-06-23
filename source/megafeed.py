@@ -12,11 +12,10 @@ class doit(webapp2.RequestHandler):
         output=""
         feeds = ['http://jkirchartz.com/rss.xml',
                  'http://glitches.jkirchartz.com/rss',
-                 'http://research.jkirchartz.com/rss',
+                 'http://tools.jkirchartz.com/researchfeed',
                  'http://stash.jkirchartz.com/rss',
                  'https://github.com/JKirchartz.atom',
                  'http://stackoverflow.com/feeds/user/276250'
-                 'http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=jkirchartz'
                 ]
         entries = []
         for feed in feeds:
