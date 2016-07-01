@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Search Remote Work</title>
+    <style>
+      body { font-size:20px/1.2; font-family:sans-serif; text-align:center; }
+      #heading { text-transform:uppercase; font-weight:bold; margin: 5vh auto; font-size:4em; }
+      #heading span:nth-child(1) { color: #F00; }
+      #heading span:nth-child(2) { color: #F90; }
+      #heading span:nth-child(3) { color: #0F0; }
+      #heading span:nth-child(4) { color: #09F; }
+      #heading span:nth-child(5) { color: #00F; }
+      #heading span:nth-child(6) { color: #F0F; }
+      #heading span:nth-child(7) { color: #09F; }
+      #heading span:nth-child(8) { color: #F90; }
+      form { width: 50%; margin: 0 auto; }
+      form input { width: 100%; }
+      form button { margin: 0 auto; }
+    </style>
+  </head>
+  <body>
+    <h1 id="heading"><span>R</span><span>e</span><span>m</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></h1>
+    <form id="search">
+      <input type="text" id="query" placeholder="Search for remote work">
+      <select id="site">
+        <option value="craigslist">Craigslist</option>
+        <option value="flexjobs">FlexJobs</option>
+        <option value="weworkremotely">WeWorkRemotely</option>
+        <option value="skipthedrive">SkipTheDrive</option>
+      </select>
+      <button type="submit">Search</button>
+    </form>
+    <script type="text/javascript" charset="utf-8">
+      document.getElementById('search').onsubmit = function(e) {
+        e.preventDefault();
+        var query = encodeURIComponent(document.getElementById('query').value);
+        var sites = document.getElementById('site');
+        var site = sites.options[sites.selectedIndex].value;
+        var url = "";
+        switch (site) {
+          case "craigslist":
+            url = "https://google.com/search?tbs=qdr:m&q=site:craigslist.org%20AND%20'telecommuting okay'%20";
+            break;
+          case "flexjobs":
+            url = "https://www.flexjobs.com/search?search=";
+            break;
+          case "weworkremotely":
+            url = "https://weworkremotely.com/jobs/search?term=";
+            break;
+          case "skipthedrive":
+            url = "http://www.skipthedrive.com/jobs/?search=";
+            break;
+        }
+        window.location.href = url + query;
+      };
+    </script>
+  </body>
+</html>
