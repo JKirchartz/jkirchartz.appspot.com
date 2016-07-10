@@ -19,25 +19,25 @@ class Doit(webapp2.RequestHandler):
         sorted_entries = sorted(entries, key=lambda entry: entry["date_parsed"])
         sorted_entries.reverse() # for most recent entries first
 
-        items = [
-            PyRSS2Gen.RSSItem(
-                title=x.title,
-                link=re.search(r'href=[\'"]?([^\'" >]+)', x.summary).group(1),
-                description=x.title,
-                guid=x.link,
-                pubDate=datetime.datetime(
-                    x.modified_parsed[0],
-                    x.modified_parsed[1],
-                    x.modified_parsed[2],
-                    x.modified_parsed[3],
-                    x.modified_parsed[4],
-                    x.modified_parsed[5])
-            )
-            for x in sorted_entries
-        ]
+        items = []
+        for x in sorted_entries:
+            link_rex = re.search(r'href=[\'"]?([^\'" >]+)', x.summary)
+            if link_rex:
+                items.append(PyRSS2Gen.RSSItem(
+                    title=x.title,
+                    link=link_rex.group(1),
+                    description=x.title,
+                    guid=x.link,
+                    pubDate=datetime.datetime(
+                        x.modified_parsed[0],
+                        x.modified_parsed[1],
+                        x.modified_parsed[2],
+                        x.modified_parsed[3],
+                        x.modified_parsed[4],
+                        x.modified_parsed[5])
+                ))
 
 
-        logging.info(items)
         # make the RSS2 object
         # Try to grab the title, link, language etc from the orig feed
 
