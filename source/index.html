@@ -49,6 +49,7 @@
   <button name="untiny" class="active">Unshorten URL</button>
   <button name="de-encoder">URI En/Decode</button>
   <button name="rand-color">Random Color</button>
+  <button name="lightdark-color">Lighten/Darken Color</button>
   <button name="commatabs">Commas to Tabs</button>
   <button name="tabcommas">Tabs to Commas</button>
   <button name="escape_rex">Escape JS Regex</button>
@@ -141,6 +142,80 @@
       return false;
     }
   </script>
+
+
+	<!--
+
+
+    __    _       __    __     ______             __
+   / /   (_)___ _/ /_  / /_  _/_/ __ \____ ______/ /__
+  / /   / / __ `/ __ \/ __/_/_// / / / __ `/ ___/ //_/
+ / /___/ / /_/ / / / / /__/_/ / /_/ / /_/ / /  / ,<
+/_____/_/\__, /_/ /_/\__/_/  /_____/\__,_/_/  /_/|_|
+        /____/
+   ______      __
+  / ____/___  / /___  _____
+ / /   / __ \/ / __ \/ ___/
+/ /___/ /_/ / / /_/ / /
+\____/\____/_/\____/_/
+
+
+	-->
+	<form id="lightdark-color">
+					<label>color <input id="ldcolor"></label>
+					<label>amount <input id="ldamt"></label>
+					<button type="submit">Lighten/Darken Color</button>
+	</form>
+	<script>
+					var ldcolor = document.getElementById('lightdark-color');
+					ldcolor.onsubmit = function(e) {
+									e.preventDefault();
+
+									var usePound = false,
+        col = document.querySelector('input#ldcolor').value,
+        amt = document.querySelector('input#ldamt').value,
+        title = document.createElement('h1'),
+        first = document.querySelector('#lightdark-color h1');
+
+    if (col[0] == "#") {
+        col = col.slice(1);
+        usePound = true;
+    }
+
+    var num = parseInt(col,16);
+
+    var r = (num >> 16) + amt;
+
+    if (r > 255) r = 255;
+    else if  (r < 0) r = 0;
+
+    var b = ((num >> 8) & 0x00FF) + amt;
+
+    if (b > 255) b = 255;
+    else if  (b < 0) b = 0;
+
+    var g = (num & 0x0000FF) + amt;
+
+    if (g > 255) g = 255;
+    else if (g < 0) g = 0;
+
+    var color = (g | (b << 8) | (r << 16)).toString(16);
+
+      title.innerHTML = (usePound?"#":"") + color;
+      title.style.backgroundColor = "#" + color;
+      title.style.border = "1px solid black";
+      title.style.textAlign = "center";
+      if(first){
+        ldcolor.removeChild(first);
+      }
+      ldcolor.appendChild(title);
+      return false;
+					};
+	</script>
+
+
+
+
 
 
   <!--

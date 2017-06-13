@@ -28,6 +28,7 @@
         <option value="flexjobs">FlexJobs</option>
         <option value="weworkremotely">WeWorkRemotely</option>
         <option value="skipthedrive">SkipTheDrive</option>
+        <option value="resumator/jazzhr">Resumator / JazzHR</option>
       </select>
       <button type="submit">Search</button>
     </form>
@@ -41,6 +42,9 @@
         switch (site) {
           case "craigslist":
             url = "https://google.com/search?tbs=qdr:m&q=site:craigslist.org%20AND%20'telecommuting okay'%20";
+            break;
+          case "":
+            url = "https://google.com/search?tbs=qdr:m&q=inurl:theresumator.com%20\"Powered by\"%20remot%20";
             break;
           case "flexjobs":
             url = "https://www.flexjobs.com/search?search=";
