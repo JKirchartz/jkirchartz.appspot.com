@@ -153,19 +153,19 @@
 					 title = document.createElement('h1'),
 					 first = document.querySelector('#lightdark-color h1');
 
-			if(typeof(p)!="number"||p<-1||p>1||typeof(from)!="string"||(from[0]!='r'&&from[0]!='#')||(typeof(to)!="string"&&typeof(to)!="undefined"))return null;
+			if(typeof(p)!="number"||p<-1||p>1||typeof(from)!="string"||(from[0]!='r'&&from[0]!='#')||(typeof(to)!="string"&&typeof(to)!="undefined"))color = null;
 			if(!this.sbcRip)this.sbcRip=function(d){
 				var l=d.length,RGB=new Object();
 				if(l>9){
 					d=d.split(",");
-					if(d.length<3||d.length>4)return null;
+					if(d.length<3||d.length>4)color = null;
 					RGB[0]=i(d[0].slice(4)),RGB[1]=i(d[1]),RGB[2]=i(d[2]),RGB[3]=d[3]?parseFloat(d[3]):-1;
 				}else{
-					if(l==8||l==6||l<4)return null;
+					if(l==8||l==6||l<4) color = null;
 					if(l<6)d="#"+d[1]+d[1]+d[2]+d[2]+d[3]+d[3]+(l>4?d[4]+""+d[4]:"");
 					d=i(d.slice(1),16),RGB[0]=d>>16&255,RGB[1]=d>>8&255,RGB[2]=d&255,RGB[3]=l==9||l==5?r(((d>>24&255)/255)*10000)/10000:-1;
 				}
-				return RGB;
+				color = RGB;
 			}
 			var i=parseInt,r=Math.round,h=from.length>9,h=typeof(to)=="string"?to.length>9?true:to=="c"?!h:false:h,b=p<0,p=b?p*-1:p,to=to&&to!="c"?to:b?"#000000":"#FFFFFF",f=sbcRip(from),t=sbcRip(to);
 			var color;
