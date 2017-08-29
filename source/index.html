@@ -4,11 +4,14 @@
 <script src="https://cdn.shoelace.style/1.0.0-beta20/shoelace.js"></script>
 <style>
 	*, *:before, *:after {
-		  box-sizing: border-box;
+		box-sizing: border-box;
 		}
-		.tabs-nav a {
-			  display: block !important;
-				}
+		.button, .tabs-nav a {
+			display: block !important;
+		}
+		button {
+			margin: .5rem 0;
+		}
 </style>
 <div class="container">
 	<header class="row">
@@ -25,8 +28,8 @@
 		<a href="#tabcommas">Tabs to Commas</a>
 		<a href="#escape_rex">Escape JS Regex</a>
 	</div>
-	<a href="/jobportal.html">Job Portal &raquo;</a>
-	<a href="/remotework.html">Remote Work &raquo;</a>
+	<a href="/jobportal.html" class="button">Job Portal &raquo;</a>
+	<a href="/remotework.html" class="button">Remote Work &raquo;</a>
 </nav>
 <div class="col-8">
   <!--
@@ -136,8 +139,8 @@
 
 	-->
 	<form class="tabs-pane" id="lightdark-color">
-					<label>color <input id="ldcolor"></label>
-					<label>amount <input id="ldamt"></label>
+					<label>color</label> <input id="ldcolor">
+					<label>amount</label> <input id="ldamt">
 					<button type="submit">Lighten/Darken Color</button>
 	</form>
 	<script>
