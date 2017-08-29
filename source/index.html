@@ -1,60 +1,32 @@
 <title>Minimal Toolkit</title>
+<link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta20/shoelace.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script src="https://cdn.shoelace.style/1.0.0-beta20/shoelace.js"></script>
 <style>
-  * { box-sizing:border-box; font-family: sans-serif; }
-  nav { display:flex; justify-content: flex-end; }
-  nav h1 { padding:0 1em; flex: 2 auto; }
-  nav button {
-    padding:1em;
-    border:0px;
-    color:#FFF;
-    text-transform:capitalize;
-    background: #0B6EC0;
-    outline:transparent;
-  }
-  nav button:first-of-type { border-radius: 2em 0 0 2em; }
-  nav button:last-of-type { border-radius: 0 2em 2em 0; }
-  nav button:hover { background: linear-gradient(to bottom, #2C82C9 0%,#0B6EC0 100%); }
-  nav button.active {
-    background: #C00B0B;
-    background: #ddd;
-    color:#111;
-  }
-  #tools {
-    display:flex;
-    align-items: flex-start;
-    align-content: space-around;
-    margin:1em;
-  }
-  form {
-    flex-grow: 1;
-    display:none;
-    margin:auto;
-    max-width:50%;
-    max-height:50%;
-    padding:1em;
-    background:#ddd;
-    border-radius:2em;
-  }
-  form button, form input, form textarea {
-    display:block;
-    width:90%;
-    margin:0.5em auto;
-    padding:0.5em;
-  }
-  textarea { resize:vertical; }
-  #untiny a { display:block; margin:0.5em }
+	*, *:before, *:after {
+		  box-sizing: border-box;
+		}
+		.tabs-nav a {
+			  display: block !important;
+				}
 </style>
-<nav>
-  <h1>Minimal Toolkit</h1>
-  <button name="untiny" class="active">Unshorten URL</button>
-  <button name="de-encoder">URI En/Decode</button>
-  <button name="rand-color">Random Color</button>
-  <button name="lightdark-color">Lighten/Darken Color</button>
-  <button name="commatabs">Commas to Tabs</button>
-  <button name="tabcommas">Tabs to Commas</button>
-  <button name="escape_rex">Escape JS Regex</button>
+<div class="container">
+	<header class="row">
+		<h1 class="col">Minimal Toolkit</h1>
+	</header>
+	<div class="tabs row">
+<nav class="tabs-nav col-4">
+  <a href="#untiny" class="active">Unshorten URL</a>
+  <a href="#de-encoder">URI En/Decode</a>
+  <a href="#rand-color">Random Color</a>
+  <a href="#lightdark-color">Lighten/Darken Color</a>
+  <a href="#commatabs">Commas to Tabs</a>
+  <a href="#tabcommas">Tabs to Commas</a>
+  <a href="#escape_rex">Escape JS Regex</a>
+  <a href="/jobportal.html">Job Portal &raquo;</a>
+	<a href="/remotework.html">Remote Work &raquo;</a>
 </nav>
-<div id="tools">
+<div class="col-8">
   <!--
    __  __           __               __
   / / / /___  _____/ /_  ____  _____/ /____  ____
@@ -64,7 +36,7 @@
 
   -->
 
-  <form id="untiny" action="/untiny" method="GET" style="display:block">
+  <form class="tabs-pane active" id="untiny" action="/untiny" method="GET" style="display:block">
     <input id="untiny-url"  name="url" />
     <button>Unshorten URL</button>
   </form>
@@ -95,7 +67,7 @@
  / /___/ / / / /_/ /  __/ /__/ /_/ / /_/ /  __/ /
 /_____/_/ /_/_____/\___/\___/\____/\__,_/\___/_/
   -->
-  <form id="de-encoder">
+  <form class="tabs-pane" id="de-encoder">
     <input id="codec" />
     <button id="codec_btn">URI (en|de)code</button>
   </form>
@@ -121,7 +93,7 @@
  / _, _/ /_/ / / / / /_/ / /_/ / / / / / /  / /___/ /_/ / / /_/ / /
 /_/ |_|\__,_/_/ /_/\__,_/\____/_/ /_/ /_/   \____/\____/_/\____/_/
   -->
-  <form id="rand-color">
+  <form class="tabs-pane" id="rand-color">
     <button id="rand-color_btn">random color</button>
   </form>
   <script>
@@ -161,7 +133,7 @@
 
 
 	-->
-	<form id="lightdark-color">
+	<form class="tabs-pane" id="lightdark-color">
 					<label>color <input id="ldcolor"></label>
 					<label>amount <input id="ldamt"></label>
 					<button type="submit">Lighten/Darken Color</button>
@@ -232,7 +204,7 @@
 /_/  \__,_/_.___/____/
 
   -->
-  <form id="commatabs">
+  <form class="tabs-pane" id="commatabs">
     <textarea id="commatabber"></textarea>
     <button id="execute">Convert Commas to Tabs</button>
   </form>
@@ -261,7 +233,7 @@
 \____/\____/_/ /_/ /_/_/ /_/ /_/\__,_/____/
 
   -->
-  <form id="tabcommas">
+  <form class="tabs-pane" id="tabcommas">
     <textarea id="tabcommer"></textarea>
     <button id="execute">Convert Tabs to Commas</button>
   </form>
@@ -284,7 +256,7 @@
 /_____/____/\___/\__,_/ .___/\___/  /_/ |_|\___/\__, /\___/_/|_|
                      /_/                       /____/
   -->
-  <form id="escape_rex">
+  <form class="tabs-pane" id="escape_rex">
     <input id="escape_regex" />
     <button id="execute">Escape JS Regex</button>
   </form>
@@ -299,6 +271,8 @@
 </div>
 
 
+</div>
+
 <!--
     _   _____ _    __
    / | / /   | |  / /
@@ -307,16 +281,14 @@
 /_/ |_/_/  |_|___/
 -->
 <script>
-  var $ = function(el, callback) {
-    [].forEach.call(document.querySelectorAll(el), callback);
-  }
-  $('nav button', function(button){
-    button.addEventListener('click', function(e) {
-      e.preventDefault;
-      $('form', function (form) { form.style.display = "none"; });
-      $('nav button', function (nav) { nav.className=""; });
-      e.target.className="active";
-      document.querySelector('#' + e.target.name).style.display = 'block';
-    });
-  });
+	function hashchange() {
+		var hash = window.location.hash;
+		if(!$(hash).hasClass('active')){
+			$('a[href="' + hash + '"]').trigger('click');
+		}
+	}
+	$(hashchange);
+	$(window).on('hashchange', hashchange);
+	$('.tabs').on('show', function(event, tabPane) {window.location.hash = '#' + tabPane.id;});
 </script>
+
