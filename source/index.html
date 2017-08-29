@@ -150,11 +150,11 @@
 
 			var color = null,
 					from = document.querySelector('input#ldcolor').value,
-					 p = int(document.querySelector('input#ldamt').value),
+					 p = parseInt(document.querySelector('input#ldamt').value, 10),
 					 title = document.createElement('h1'),
 					 first = document.querySelector('#lightdark-color h1');
 
-					if(typeof(p)!="number"||p<-1||p>1||typeof(from)!="string"||(from[0]!='r'&&from[0]!='#')||(typeof(to)!="string"&&typeof(to)!="undefined"))color  null;
+					if(typeof(p)!="number"||p<-1||p>1||typeof(from)!="string"||(from[0]!='r'&&from[0]!='#')||(typeof(to)!="string"&&typeof(to)!="undefined"))return null;
 						if(!this.sbcRip)this.sbcRip=function(d){
 									var l=d.length,RGB=new Object();
 											if(l>9){
