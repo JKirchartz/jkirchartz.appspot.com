@@ -168,7 +168,7 @@
 		ldcolor.onsubmit = function(e) {
 			e.preventDefault();
 			var from = document.querySelector("input#ldcolor").value,
-					p = parseInt(document.querySelector("input#ldamt").value, 10),
+					p = parseFloat(document.querySelector("input#ldamt").value, 10),
 					title = document.createElement("h1"),
 					first = document.querySelector("#lightdark-color h1");
 			var color = shadeBlendConvert(p,from);
