@@ -42,7 +42,7 @@
   -->
 
   <form class="tabs-pane active" id="untiny" action="/untiny" method="GET" >
-		<input id="untiny-url"  name="url" /> <br/>
+		<input type="text" id="untiny-url"  name="url" /> <br/>
     <button>Unshorten URL</button>
   </form>
   <script>
@@ -73,7 +73,7 @@
 /_____/_/ /_/_____/\___/\___/\____/\__,_/\___/_/
   -->
   <form class="tabs-pane" id="de-encoder">
-		<input id="codec" /> <br/>
+		<input type="text" id="codec" /> <br/>
     <button id="codec_btn">URI (en|de)code</button>
   </form>
   <script>
@@ -139,7 +139,7 @@
 
 	-->
 	<form class="tabs-pane" id="lightdark-color">
-		<div class="input-field"><label>color</label> <input id="ldcolor"></div>
+		<div class="input-field"><label>color</label> <input type="text" id="ldcolor"></div>
 		<div class="input-field"><label>amount</label> <input id="ldamt" type="number" min="-1" max="1" step="0.01"></div>
 		<button type="submit">Lighten/Darken Color</button>
 	</form>
@@ -256,7 +256,7 @@
                      /_/                       /____/
   -->
   <form class="tabs-pane" id="escape_rex">
-		<input id="escape_regex" /> <br/>
+		<input type="text" id="escape_regex" /> <br/>
     <button id="execute">Escape JS Regex</button>
   </form>
   <script>
